@@ -4,8 +4,6 @@ title: "Functional Programming: Untyped Lambda Calculus"
 date: 2025-11-01
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-
 # Functional Programming: Untyped Lambda Calculus
 
 *Part of a series on the theory and practice of functional programming.*
@@ -252,4 +250,4 @@ An Introduction to Functional Programming through Lambda Calculus, G. Michaelson
 Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
 Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
 
-
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
