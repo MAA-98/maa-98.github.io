@@ -4,7 +4,11 @@ title: "Functional Programming: Untyped Lambda Calculus"
 date: 2025-11-01
 ---
 
-{% include mathjax.html %}
+{% raw %}
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+{% endraw %}
+
+# Functional Programming: Untyped Lambda Calculus
 
 *Part of a series on the theory and practice of functional programming.*
 
