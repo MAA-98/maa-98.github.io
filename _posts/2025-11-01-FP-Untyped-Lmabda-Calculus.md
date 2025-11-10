@@ -22,21 +22,14 @@ For this reason, if you can already program in C, learning Haskell is more stimu
 
 In C, if you remember (future link), a function call creates a new stack frame and the parameters fed in are copies of the outer scope values (pass by value). The program does some procedure with allocated values in that frame, returns a value to the calling stack frame addressed above, and frees the memory space of the finished stack frame. In that sense, a function in C is really a *procedure* isolated from the functions/procedures above it. This is why C is called a *procedural* language, a subclass of imperative programming. This isolated scoping of the variables is called lexical (or static) scope, it forces the use of pointers as input parameters for changes that persist past the scope. 
 
-In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as 
-$C^D$
+In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as $C^D$. 
+This is a very static object; the definition of such a *pure* function has no procedure to complete, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression using another to stack these definitions. This purity is called *referential transparency* ([HPFP](#HFPF) p.30).
 
-`$C^D$`
-
-{% raw %} $C^D$ {% endraw %}
-
-
-. This is a very "static" object; the definition of such a *pure* function has no procedures, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression dependent on another defined after it. This purity is called *referential transparency* (HPFP p.30).
-
-Haskell also has lexical/static scope, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called 'shadowing'.
+Haskell's scope is also lexical/static, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called 'shadowing'.
 
 ## Untyped Lambda Calculus
 
-Untyped lambda calculus is a Turing complete model of computing[^1]. Historically, Turing machines have been found easier to implement but lambda calculus has been found easier to reason about. Lambda calculus makes the process of function reduction and evaluation explicit, in fact, lambda calculus only has (pure) functions as objects. Since lambda calculus seems so abstract from what we'd first consider to be computation, it is helpful ot know its history.
+Untyped lambda calculus is a Turing complete model of computing[^1]. Historically, Turing machines have been found easier to implement but lambda calculus has been found easier to reason about. Lambda calculus makes the process of function reduction and evaluation explicit, in fact its objects are only functions and variables. Since lambda calculus seems so abstract from what we'd first consider to be computation, it is helpful to know its history.
 Church looked to study functions in purely syntactic terms, just as propositional logic was formalized and studied as application of syntax rules. Functions in mathematics are defined through semantics of sets, rather than pure syntax rules. Lambda calculus is thinking of "functions-as-rules" instead of the traditional "functions-as-sets" (SEP, sec. 1.2).
 It should then be considered in this light as a 'game' of syntax manipulation, before looking for any semantics (or model) of it. The connection to computation was discovered only after the formalism. 
 
@@ -251,7 +244,10 @@ We talk about types next, which helps to see why we needed parenthesis above to 
 
 
 ## References
-Haskell Programming From First Principles C. Allen, J. Moronuki, 2016 (HPFP)
+
+<a id="HFPF"></a>
+HFPF: Haskell Programming From First Principles C. Allen, J. Moronuki, 2016
+
 Type Theory & Functional Programming, S. Thompson, 1999 (TTFP)
 The Lambda Calculus, J. Alama, Stanford Encyclopedia of Philosophy, 2023 (SEP)
 An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011 (FPLC)
