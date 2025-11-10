@@ -97,9 +97,7 @@ Eta equivalence is defined as regarding
 
 `\x.(M x)` where `x` is not free in `M` (ensuring `x` is not binding instances of `x` in `M`), 
 
-as the same as 
-
-`M`.
+as the same as `M`.
 
 Eta equivalence is implied by the definition of beta reduction ([TTFP](#TTFP), p.39); if we only care about the behavior of functions in beta reduction, then we only care about abstractions up to eta equivalence, seeing how it has exactly the same behavior in applications: 
 
@@ -111,7 +109,7 @@ How eta equivalence is treated depends on the context; it is usually not thought
 
 ### Reduction
 
-"There are two approaches to evaluating \[nested\] function applications. For both, the function expression is evaluated to return a function. Next, all occurences of the function’s bound variable in the function’s body expression are replaced by either
+"There are two approaches to evaluating \[nested\] function applications. For both, the function expression is evaluated to return a function. Next, all occurrences of the function’s bound variable in the function’s body expression are replaced by either
 
 - the value of the argument expression, or
 - the unevaluated argument expression
