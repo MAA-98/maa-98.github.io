@@ -6,29 +6,23 @@ date: 2025-11-01
 
 {% include mathjax.html %}
 
-# Functional Programming: Untyped Lambda Calculus
-
 *Part of a series on the theory and practice of functional programming.*
 
 ## Introduction
 
-### Contrast between C 
+### Contrast between C and Haskell 
 
 The Haskell programming language is very different in its *paradigm* to the common "practical" languages based upon C; many of those languages can be understood as extensions of C (with classes, with automatic reference counting, with borrow checking, etc.), a purely functional programming language requires a different perspective altogether. 
 
-C was developed as a language for UNIX and hence it closely matches the abilities of the OS, whereas Haskell developed as an implementation of theoretical theory. To understand C design decisions, you should understand UNIX processes and POSIX system calls, and to understand the design decisions of funcitonal programming languages you should understand lambda calculus and type theory. While C is "bottom-up", from metal to abstractions, Haskell is "top-down", from abstractions to metal, in its design.
+C was developed as a language for UNIX and hence it closely matches the abilities of the OS, whereas Haskell developed as an implementation of theoretical theory. To understand C design decisions, you should understand UNIX processes and POSIX system calls, and to understand the design decisions of functional programming languages you should understand lambda calculus and type theory. While C is "bottom-up", from metal to abstractions in its design, Haskell is "top-down", from abstractions to metal.
 
-For this reason, if you can already program in C, learning Haskell is far more useful than diving into Go, Rust, Swift, C++, Carbon, Zig, D, etc. It provides a different set of tools, rather than a different version of a tool you already have; the situations where C shines (low-level control, transparent implementation) and Haskell shines (concise, transparent references, strong correctness) are close to distinct.
+For this reason, if you can already program in C, learning Haskell is more stimulating than diving into Go, Rust, Swift, C++, Carbon, Zig, D, etc. It provides a different set of tools, rather than a different version of a tool you already have; the situations where C shines (low-level control, transparent implementation) and Haskell shines (concise, transparent references, strong correctness) are close to distinct.
 
 ### What is a Function?
 
 In C, if you remember (future link), a function call creates a new stack frame and the parameters fed in are copies of the outer scope values (pass by value). The program does some procedure with allocated values in that frame, returns a value to the calling stack frame addressed above, and frees the memory space of the finished stack frame. In that sense, a function in C is really a *procedure* isolated from the functions/procedures above it. This is why C is called a *procedural* language, a subclass of imperative programming. This isolated scoping of the variables is called lexical (or static) scope, it forces the use of pointers as input parameters for changes that persist past the scope. 
 
-In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as 
-
-(C)^(domain). 
-
-This is a very "static" object; the definition of such a *pure* function has no procedures, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression dependent on another defined after it. This purity is called *referential transparency* (HPFP p.30).
+In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as $C^D$. This is a very "static" object; the definition of such a *pure* function has no procedures, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression dependent on another defined after it. This purity is called *referential transparency* (HPFP p.30).
 
 Haskell also has lexical/static scope, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called 'shadowing'.
 
