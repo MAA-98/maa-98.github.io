@@ -23,7 +23,7 @@ For this reason, if you can already program in C, learning Haskell is more stimu
 In C, if you remember (future link), a function call creates a new stack frame and the parameters fed in are copies of the outer scope values (pass by value). The program does some procedure with allocated values in that frame, returns a value to the calling stack frame addressed above, and frees the memory space of the finished stack frame. In that sense, a function in C is really a *procedure* isolated from the functions/procedures above it. This is why C is called a *procedural* language, a subclass of imperative programming. This isolated scoping of the variables is called lexical (or static) scope, it forces the use of pointers as input parameters for changes that persist past the scope. 
 
 In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as $C^D$. 
-This is a very static object; the definition of such a *pure* function has no procedure to complete, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression using another to stack these definitions. This purity is called *referential transparency* ([HPFP](#HFPF) p.30).
+This is a very static object; the definition of such a *pure* function has no procedure to complete, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression using another to stack these definitions. This purity is called *referential transparency* ([HPFP](#HPFP) p.30).
 
 Haskell's scope is also lexical/static, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called "shadowing".
 
@@ -56,9 +56,7 @@ To avoid writing too many parenthesis, the convention is that:
 
 #### Alpha Equivalence
 
-_+_+_+_ BKM _+_+_+_+_
-
-Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of x with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
+Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of `x` with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
 A simple example would be substituting variable `y` for `x` in expression `\y.x`, naive substituting gives `\y.y` as the result but it should be `\z.y`, the meaning of the term changed with the variable capture; the abstraction meant `x` whatever `y` is, and got replaced to mean return whatever the input is. To avoid this we need labels for bound variables and free variables.
 
 Bound variables of lambda expressions are easily defined inductively as:
@@ -84,14 +82,14 @@ A lambda expression represents a computation yet to be attempted, like a recipe 
 ```
 where `M[x := N]` means every instance of `x` variable in `M` is replaced by `N` expression.
 
-As shown in the previous example, `(\x\y.x) y → \y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead beta-reduction is only acceptable when the bounded variables in `M` are distinct from the free variables in `N`. Otherwise, we use alpha equivalence to make the two distinct and go ahead with the reduction:
+As shown in the previous example, `(\x\y.x) y → \y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in `M` distinct from the free variables in `N`. We use alpha equivalence to make the two distinct and go ahead with the reduction:
 
 ```
 (\x\y.x) y → (\x\z.x) y → \z.y 
 ```
 is a correct reduction.
 
-"A computation therefore consists of an initial lambda expression \[...\] plus a finite sequence of lambda terms, each deduced from the preceding term by one application of beta reduction." (HPFP, p. 36) Note that there is a choice of reduction strategy by which applications one chooses to reduce first.
+"A computation therefore consists of an initial lambda expression \[...\] plus a finite sequence of lambda terms, each deduced from the preceding term by one application of beta reduction." ([HPFP](#HPFP), p. 36) Note that there is a choice of reduction strategy by which applications one chooses to reduce first.
 
 #### Eta Equivalence
 
@@ -103,11 +101,13 @@ as the same as
 
 `M`.
 
-Eta equivalence is implied by the definition of beta reduction (TTFP, p.39); if we only care about the behavior of functions in beta reduction, then we only care about abstractions up to eta equivalence, seeing how it has exactly the same behavior in applicaitons: 
+Eta equivalence is implied by the definition of beta reduction ([TTFP](#TTFP), p.39); if we only care about the behavior of functions in beta reduction, then we only care about abstractions up to eta equivalence, seeing how it has exactly the same behavior in applications: 
 
 `\x.(M x) N → M N`.
 
-How eta equivalence is treated depends on the context; it is usually not thought of as a computational step but instead expressing the same computation like alpha equivalence.
+How eta equivalence is treated depends on the context; it is usually not thought of as a computational step but instead expressing the same computation, like alpha equivalence.
+
+++++++BKM ++++++
 
 ### Reduction
 
@@ -238,23 +238,24 @@ ghci> (\x -> \y -> x) 2 (fix (\x -> x + 1))
 
 We talk about types next, which helps to see why we needed parenthesis above to avoid creating a list containing a function, and instead have the list contain the results of the function. It's a *type error*.
 
+## References
+
+<a id="HFPF"></a>
+HPFP: Haskell Programming From First Principles C. Allen, J. Moronuki, 2016
+
+<a id="SEP"></a>
+SEP: The Lambda Calculus, J. Alama, Stanford Encyclopedia of Philosophy, 2023
+
+<a id="TTFP"></a>
+TTFP: Type Theory & Functional Programming, S. Thompson, 1999
+
+
+An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011 (FPLC)
+Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
+Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
 
 ## Footnotes
 [^1]: Adding type restrictions to lambda calculus stops it being Turing complete. 
 [^2]: Abstractions are meant to be generalized functions, so "lambda functions" is synonymous. Lambda functions are often called "anonymous functions" since they're not assigned an identifier to be called.
 [^3]: Via Church numeral encodings, integers themselves may be considered as lambda abstractions, so the infix notation `2 + 2` is really `(((2) +) 2)` nested abstractions that Haskell then evaluates (normalizes the expression) to the lambda abstraction with encoding `4`. For convenience and type checking Haskell just treats integers as a base type.
-
-
-## References
-
-<a id="HFPF"></a>
-HFPF: Haskell Programming From First Principles C. Allen, J. Moronuki, 2016
-
-<a id="SEP"></a>
-The Lambda Calculus, J. Alama, Stanford Encyclopedia of Philosophy, 2023 (SEP)
-
-Type Theory & Functional Programming, S. Thompson, 1999 (TTFP)
-An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011 (FPLC)
-Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
-Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
 
