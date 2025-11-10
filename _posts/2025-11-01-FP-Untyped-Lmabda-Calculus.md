@@ -14,7 +14,7 @@ date: 2025-11-01
 
 The Haskell programming language is very different in its *paradigm* to the common "practical" languages based upon C; many of those languages can be understood as extensions of C (with classes, with automatic reference counting, with borrow checking, etc.), a purely functional programming language requires a different perspective altogether. 
 
-C was developed as a language for UNIX and hence it closely matches the abilities of the OS, whereas Haskell developed as an implementation of theoretical theory. To understand C design decisions, you should understand UNIX processes and POSIX system calls, and to understand the design decisions of functional programming languages you should understand lambda calculus and type theory. While C is "bottom-up", from metal to abstractions in its design, Haskell is "top-down", from abstractions to metal.
+C was developed as a language for UNIX and hence it closely matches the abilities of the OS, whereas Haskell developed as an implementation of theoretical theory. To understand C design decisions, you should understand UNIX processes and POSIX system calls, and to understand the design decisions of functional programming languages you should understand lambda calculus and type theory. While C is from metal to abstractions in its design, Haskell is from abstractions to metal.
 
 For this reason, if you can already program in C, learning Haskell is more stimulating than diving into Go, Rust, Swift, C++, Carbon, Zig, D, etc. It provides a different set of tools, rather than a different version of a tool you already have; the situations where C shines (low-level control, transparent implementation) and Haskell shines (concise, transparent references, strong correctness) are close to distinct.
 
@@ -25,13 +25,13 @@ In C, if you remember (future link), a function call creates a new stack frame a
 In Haskell, a function is an expression of its parameters that may be evaluated (given concrete input values, get the output) or reduced (given parameters as symbols, may be reduced to just those symbols). This is more similar to mathematics; a function is a many-to-one mapping between the domain and codomain, i.e. the functions are a particular class of subsets of the domain times the codomain, denoted as $C^D$. 
 This is a very static object; the definition of such a *pure* function has no procedure to complete, just names with expressions. Each name can only defined once in a scope, like in mathematics, which means there is no particular order to evaluate or reduce a sequence of expressions, they will always mean the same thing logically and we can write an expression using another to stack these definitions. This purity is called *referential transparency* ([HPFP](#HFPF) p.30).
 
-Haskell's scope is also lexical/static, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called 'shadowing'.
+Haskell's scope is also lexical/static, but in some way it is a more extreme example where variables are never redefined in the function definition. You can use the same name outside the scope and be confident it refers to a totally different object, this is sometimes called "shadowing".
 
 ## Untyped Lambda Calculus
 
 Untyped lambda calculus is a Turing complete model of computing[^1]. Historically, Turing machines have been found easier to implement but lambda calculus has been found easier to reason about. Lambda calculus makes the process of function reduction and evaluation explicit, in fact its objects are only functions and variables. Since lambda calculus seems so abstract from what we'd first consider to be computation, it is helpful to know its history.
-Church looked to study functions in purely syntactic terms, just as propositional logic was formalized and studied as application of syntax rules. Functions in mathematics are defined through semantics of sets, rather than pure syntax rules. Lambda calculus is thinking of "functions-as-rules" instead of the traditional "functions-as-sets" (SEP, sec. 1.2).
-It should then be considered in this light as a 'game' of syntax manipulation, before looking for any semantics (or model) of it. The connection to computation was discovered only after the formalism. 
+Church looked to study functions in purely syntactic terms, just as propositional logic was formalized and studied as application of syntax rules. Functions in mathematics are defined through semantics of sets, rather than pure syntax rules. Lambda calculus is thinking of "functions-as-rules" instead of the traditional "functions-as-sets" ([SEP](#SEP), sec. 1.2).
+It should then be considered in this light as a game of syntax manipulation, before looking for any semantics (or model) of it. The connection to computation was discovered only after the formalism. 
 
 ### Definitions
 
@@ -40,7 +40,7 @@ It should then be considered in this light as a 'game' of syntax manipulation, b
 The lambda calculus has three types of expressions/terms:
 
 - variables, denoted by some identifier of which there are infinitely many available. 
-- abstractions, consist of some variable, say `x`, and some expression in the lambda calculus, potentially containing `x`. We'll denote it as `\x.M` where `x` is the variable and `M` is an expression[^2]. 
+- abstractions, consist of some variable, say `x`, and some expression in the lambda calculus, potentially containing `x`. We'll denote it as `\x.M` where `x` is the variable and `M` is an expression[^2].
 - applications, which is an ordered pair of expressions `(M N)`. 
 
 Examples of lambda terms: `x`, `\x.x`, `(x y)`, `(x \y.y)`, `(x (\y.y x))`, etc.
@@ -52,9 +52,11 @@ To avoid writing too many parenthesis, the convention is that:
 - two expressions in sequence are an application: `M N` means `(M N)`,
 - more than two expressions in a sequence are left associative unless indicated otherwise, so a sequence of expressions like `M N L` is meant as `((M N) L)`,
 - multiple nested applications are written with bound variables in a sequence: `\x\y\z.M` or even `\xyz.M` means `\x.(\y.(\z.M))`,
-- abstraction is lower precedence than application, so `\x.M N` means `\x.(M N)` unless parenthesized otherwise.
+- abstraction is lower precedence than application, so `\x.M N` means `\x.(M N)` unless indicated otherwise.
 
 #### Alpha Equivalence
+
+_+_+_+_ BKM _+_+_+_+_
 
 Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of x with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
 A simple example would be substituting variable `y` for `x` in expression `\y.x`, naive substituting gives `\y.y` as the result but it should be `\z.y`, the meaning of the term changed with the variable capture; the abstraction meant `x` whatever `y` is, and got replaced to mean return whatever the input is. To avoid this we need labels for bound variables and free variables.
@@ -239,7 +241,7 @@ We talk about types next, which helps to see why we needed parenthesis above to 
 
 ## Footnotes
 [^1]: Adding type restrictions to lambda calculus stops it being Turing complete. 
-[^2]: Abstractions are meant to be generalized functions, so 'lambda functions' is synonymous. Lambda functions are often called "anonymous functions" since they're not given an identifier to be called.
+[^2]: Abstractions are meant to be generalized functions, so "lambda functions" is synonymous. Lambda functions are often called "anonymous functions" since they're not assigned an identifier to be called.
 [^3]: Via Church numeral encodings, integers themselves may be considered as lambda abstractions, so the infix notation `2 + 2` is really `(((2) +) 2)` nested abstractions that Haskell then evaluates (normalizes the expression) to the lambda abstraction with encoding `4`. For convenience and type checking Haskell just treats integers as a base type.
 
 
@@ -248,8 +250,10 @@ We talk about types next, which helps to see why we needed parenthesis above to 
 <a id="HFPF"></a>
 HFPF: Haskell Programming From First Principles C. Allen, J. Moronuki, 2016
 
-Type Theory & Functional Programming, S. Thompson, 1999 (TTFP)
+<a id="SEP"></a>
 The Lambda Calculus, J. Alama, Stanford Encyclopedia of Philosophy, 2023 (SEP)
+
+Type Theory & Functional Programming, S. Thompson, 1999 (TTFP)
 An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011 (FPLC)
 Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
 Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
