@@ -4,6 +4,8 @@ title: "Functional Programming: Untyped Lambda Calculus"
 date: 2025-11-01
 ---
 
+{% include mathjax.html %}
+
 # Functional Programming: Untyped Lambda Calculus
 
 *Part of a series on the theory and practice of functional programming.*
