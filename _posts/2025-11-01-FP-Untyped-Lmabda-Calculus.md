@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Functional Programming: Untyped Lambda Calculus"
-date: 2025-10-01
+date: 2025-11-01
 ---
 
 # Functional Programming: Untyped Lambda Calculus

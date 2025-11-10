@@ -6,7 +6,7 @@ permalink: "/"
 
 <p>By Marek Alexander Anthony <small>(né Marek Antoni Kurczyński)</small></p>
 
-# Posts
+## Posts
 
 <ul>
   {% for post in site.posts %}
