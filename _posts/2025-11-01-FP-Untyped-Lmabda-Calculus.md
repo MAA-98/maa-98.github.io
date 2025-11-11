@@ -56,7 +56,8 @@ To avoid writing too many parenthesis, the convention is that:
 
 #### Alpha Equivalence
 
-Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
+Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence.[^3] 
+There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
 A simple example would be substituting variable $y$ for $x$ in the abstraction 
 
 $$
@@ -77,19 +78,17 @@ $$
 
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
-Bound variables of lambda expressions are easily defined inductively as:
+Bound variables of lambda expressions are easily defined inductively as ([SEP](#SEP) sec. 2.1):
 
 $$
 \begin{aligned}
 BV(x) &= \{\} \\
-BV(\lambda x.M) &= \{x\} + BV(M) \\
-BV(M N) &= BV(M) + BV(N) 
+BV(\lambda x.M) &= \{x\} \cup BV(M) \\
+BV(M N) &= BV(M) \cup BV(N) 
 \end{aligned}
 $$
 
-++++++BKM++++++++
-
-where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
+ Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
 
 $$
 \begin{aligned}
@@ -102,6 +101,8 @@ $$
 *Alpha equivalence* means bounded variables may be replaced without changing the meaning of the lambda expression. In fact, they often have to be renamed in reductions.
 
 #### Beta Reduction
+
+++++++BKM++++++++
 
 A lambda expression represents a computation yet to be attempted, like a recipe yet to be performed. The order of the steps to be taken is not yet specified, doing a computation is analogous to a *reduction*. Given a lambda expression, *beta-reduction* may be applied to applications within it if the first term is an abstraction:
 ```
@@ -208,7 +209,7 @@ ghci> (+ 2) 2
 4
 ```
 
-The operator `+` may be considered as some shortcut for a lambda abstraction, it accepts two arguments by currying. The first line is the common infix notation, the second line explicitly invokes the `+` lambda abstraction and applies it twice over, the second line explicitly invokes the lambda abstraction of a single argument `(+ 2)` that just adds `2` to any argument[^3].
+The operator `+` may be considered as some shortcut for a lambda abstraction, it accepts two arguments by currying. The first line is the common infix notation, the second line explicitly invokes the `+` lambda abstraction and applies it twice over, the second line explicitly invokes the lambda abstraction of a single argument `(+ 2)` that just adds `2` to any argument[^4].
 
 The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortuntely `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an arguement but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.
 
@@ -282,5 +283,6 @@ Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson
 ## Footnotes
 [^1]: Adding type restrictions to lambda calculus stops it being Turing complete. 
 [^2]: Abstractions are meant to be generalized functions, so "lambda functions" is synonymous. Lambda functions are often called "anonymous functions" since they're not assigned an identifier to be called.
-[^3]: Via Church numeral encodings, integers themselves may be considered as lambda abstractions, so the infix notation `2 + 2` is really `(((2) +) 2)` nested abstractions that Haskell then evaluates (normalizes the expression) to the lambda abstraction with encoding `4`. For convenience and type checking Haskell just treats integers as a base type.
+[^3]: Alpha equivalnece is exactly the rule that encodes semantics of functions, without which lambda calculus would just become naive rewriting or a macro system like in C preprocessing. 
+[^4]: Via Church numeral encodings, integers themselves may be considered as lambda abstractions, so the infix notation `2 + 2` is really `(((2) +) 2)` nested abstractions that Haskell then evaluates (normalizes the expression) to the lambda abstraction with encoding `4`. For convenience and type checking Haskell just treats integers as a base type.
 
