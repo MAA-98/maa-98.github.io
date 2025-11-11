@@ -171,9 +171,7 @@ If we apply it to itself we get a non-terminating expresssion:
 
 $S S \xrightarrow{\hspace{5pt}\beta\hspace{5pt}}  S S$.
 
-Fixed point combinators are so that any function applied to it is a fixed point of that function: $(Y g) = g (Y g)$.
-
-Most well-known, and similar to the self-application combinator, is the Y combinator: 
+Fixed point combinators are so that any function applied to it is a fixed point of that function: $(Y g) = g (Y g)$. The most well-known, and similar to the self-application combinator, is the Y combinator: 
 
 $$
 Y := \lambda f. \lambda x.f(xx) \lambda x.f(xx)
@@ -181,12 +179,10 @@ $$
 
 where
 
-++++++BKM ++++++
-
 $$
 \begin{aligned}
-Y g &= \lambda x.g(x x) \lambda x.g(x x)
-    &= g (\lambda x.g(x x) \lambda x.g(x x))
+Y g &= \lambda x.g(x x) \lambda x.g(x x) \\
+    &= g (\lambda x.g(x x) \lambda x.g(x x)) \\
     &= g (Y g)
 \end{aligned}
 $$
@@ -198,6 +194,8 @@ The theory of lambda calculus is deep and growing, but for the rest of this arti
 ## Haskell's Implementation
 
 ### Currying and Evaluation
+
+++++++BKM ++++++
 
 As shown in the convention of left associativity (LINK TODO), multiple nested abstractions `\x(\y(\z.M))` mean the same as a multi-argument function `\xyz.M`. This is called currying, and is the standard way to deal with functions in functional programming. 
 
