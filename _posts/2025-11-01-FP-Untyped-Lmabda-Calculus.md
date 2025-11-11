@@ -40,7 +40,7 @@ It should then be considered in this light as a game of syntax manipulation, bef
 The lambda calculus has three types of expressions/terms:
 
 - variables, denoted by some identifier of which there are infinitely many available. 
-- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing $x$. We'll denote it as $\lambda x.M$ where $x$ is the variable and $M$ is an expression.[^2]
+- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing      $x$. We'll denote it as $\lambda x.M$ where $x$ is the variable and $M$ is an expression.[^2]
 - applications, which are ordered pairs of expressions: $(M N)$. 
 
 Examples of lambda terms with explicit abstractions: $x$, $\lambda x.x$, $(x y)$, $(x \lambda y.y)$, $(x (\lambda y.y x))$, etc.
