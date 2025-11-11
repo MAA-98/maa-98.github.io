@@ -78,7 +78,7 @@ $$
 
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
-Bound variables of lambda expressions are easily defined inductively as ([SEP](#SEP) sec. 2.1):
+Bound variables of lambda expressions are easily defined inductively as ([SEP](#SEP), sec. 2.1):
 
 $$
 \begin{aligned}
@@ -102,13 +102,15 @@ $$
 
 #### Beta Reduction
 
-++++++BKM++++++++
+A lambda expression represents a computation yet to be attempted, like a recipe yet to be performed but the order of the steps to be taken is not yet specified, doing a computational step is analogous to a *beta-reduction*. Given a lambda application, *beta-reduction* is
 
-A lambda expression represents a computation yet to be attempted, like a recipe yet to be performed. The order of the steps to be taken is not yet specified, doing a computation is analogous to a *reduction*. Given a lambda expression, *beta-reduction* may be applied to applications within it if the first term is an abstraction:
-```
-(\x.M) N → M[x := N]
-```
-where `M[x := N]` means every instance of `x` variable in `M` is replaced by `N` expression.
+$$
+(\lambda x.M) N \xrightarrow{\beta} M[x := N]
+$$
+
+where $M[x := N]$ means every instance of $x$ variable in $M$ is replaced by the expression $N$.
+
++++BKM+++
 
 As shown in the previous example, `(\lambda x\lambda y.x) y → \lambda y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in `M` distinct from the free variables in `N`. We use alpha equivalence to make the two distinct and go ahead with the reduction:
 
