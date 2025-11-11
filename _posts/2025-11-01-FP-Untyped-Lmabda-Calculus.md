@@ -57,16 +57,17 @@ To avoid writing too many parenthesis, the convention is that:
 #### Alpha Equivalence
 
 Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
-A simple example would be substituting variable $y$ for $x$ in expression $\lambda y.x$, naive substituting gives $\lambda y.y$ as the result but it should be $\lambda z.y$, the meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this we need labels for bound variables and free variables.
+A simple example would be substituting variable $y$ for $x$ in the abstraction $$\lambda y.x$$, naive substituting gives $$\lambda y.y$$ as the result but it should be $$\lambda z.y$$ 
+The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
 ++++++BKM++++++++
 
 Bound variables of lambda expressions are easily defined inductively as:
-```txt
+$$
 BV(x) = {}
 BV(\x.M) = {x} + BV(M)
 BV(M N) = BV(M) + BV(N)
-```
+$$
 where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
 ```txt
 FV(x) = {x}
