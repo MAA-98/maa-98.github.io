@@ -45,7 +45,8 @@ The lambda calculus has three types of expressions/terms:
 
 Examples of lambda terms with explicit abstractions: $x$, $\lambda x.x$, $(x y)$, $(x \lambda y.y)$, $(x (\lambda y.y x))$, etc.
 
-#### Left Associativity
+<a id="leftass"></a>
+#### Left Associativity 
 
 To avoid writing too many parenthesis, the convention is that: 
 
@@ -88,7 +89,7 @@ BV(M N) &= BV(M) \cup BV(N)
 \end{aligned}
 $$
 
- Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
+Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
 
 $$
 \begin{aligned}
@@ -193,14 +194,13 @@ The theory of lambda calculus is deep and growing, but for the rest of this arti
 
 ## Haskell's Implementation
 
+For use in code, Haskell uses `\` instead of $\lambda$.
+
 ### Currying and Evaluation
 
-++++++BKM ++++++
+As shown in the convention of [left associativity](#leftass), multiple nested abstractions `\x(\y(\z.M))` mean the same as a multi-argument function `\xyz.M`. This is called currying, and is the standard way to deal with functions in functional programming. 
 
-As shown in the convention of left associativity (LINK TODO), multiple nested abstractions `\x(\y(\z.M))` mean the same as a multi-argument function `\xyz.M`. This is called currying, and is the standard way to deal with functions in functional programming. 
-
-Haskell's reduction strategy for lambda expressions is left-to-right, or some may say outer-in, this has some advantages (and disadvantages) and is different than most imperative languages that work out the value of an argument before using it in a procedure. The technical term for left-to-right is *normal* reduction as opposed to the in-out being called *applicative* reduction.
-
+Haskell's reduction strategy for lambda expressions is normal and lazy as stated above, which is different than most imperative languages that work out the value of an argument before using it in a procedure. 
 This has implications for syntax straight away: in the Haskell REPL, 
 
 ```txt
@@ -212,11 +212,9 @@ ghci> (+ 2) 2
 4
 ```
 
-The operator `+` may be considered as some shortcut for a lambda abstraction, it accepts two arguments by currying. The first line is the common infix notation, the second line explicitly invokes the `+` lambda abstraction and applies it twice over, the second line explicitly invokes the lambda abstraction of a single argument `(+ 2)` that just adds `2` to any argument[^4].
+The operator `+` may be considered as some shortcut for a lambda abstraction, it accepts two arguments by currying. The first line is the common infix notation, the second line explicitly invokes the `+` lambda abstraction and applies it twice over, the second line explicitly invokes the lambda abstraction of a single argument `(+ 2)` that just adds `2` to any argument.[^4]
 
-The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortuntely `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an arguement but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.
-
-In actuality, Haskell's operators also have precedence levels that influence evaluation; they're slightly different than just functions, but the above is still correct because `+` and `-` have the same precedence (6 out of 10). 
+The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortuntely `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an arguement but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.[^5]
 
 ### Lambdas
 
@@ -293,4 +291,5 @@ Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson
 [^2]: Abstractions are meant to be generalized functions, so "lambda functions" is synonymous. Lambda functions are often called "anonymous functions" since they're not assigned an identifier to be called.
 [^3]: Alpha equivalnece is exactly the rule that encodes semantics of functions, without which lambda calculus would just become naive rewriting or a macro system like in C preprocessing. 
 [^4]: Via Church numeral encodings, integers themselves may be considered as lambda abstractions, so the infix notation `2 + 2` is really `(((2) +) 2)` nested abstractions that Haskell then evaluates (normalizes the expression) to the lambda abstraction with encoding `4`. For convenience and type checking Haskell just treats integers as a base type.
+[^5]: In actuality, Haskell's operators also have precedence levels that influence evaluation, but the above is still correct because `+` and `-` have the same precedence (6 out of 10). 
 
