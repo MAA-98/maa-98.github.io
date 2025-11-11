@@ -69,7 +69,7 @@ $$
 \lambda y.y
 $$ 
 
-as the result but it should be 
+as the result, but it should be 
 
 $$
 \lambda z.y .
@@ -84,7 +84,9 @@ Bound variables of lambda expressions are easily defined inductively as:
 $$
 \begin{aligned}
 BV(x) = \{\}
+
 BV(\x.M) = \{x\} + BV(M)
+
 BV(M N) = BV(M) + BV(N)
 \end{aligned}
 $$
