@@ -72,29 +72,32 @@ $$
 as the result, but it should be 
 
 $$
-\lambda z.y .
+\lambda z.y
 $$ 
 
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
-
-++++++BKM++++++++
 
 Bound variables of lambda expressions are easily defined inductively as:
 
 $$
 \begin{aligned}
 BV(x) &= \{\} \\
-BV(\x.M) &= \{x\} + BV(M) \\
+BV(\lambda x.M) &= \{x\} + BV(M) \\
 BV(M N) &= BV(M) + BV(N) 
 \end{aligned}
 $$
 
+++++++BKM++++++++
+
 where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
-```txt
-FV(x) = {x}
-FV(\x.M) = FV(M) - {x}
-FV(M N) = FV(M) + FV(N)
-```
+
+$$
+\begin{aligned}
+FV(x) &= \{x\} \\
+FV(\lambda x.M) &= FV(M) \setminus \{x\} \\
+FV(M N) &= FV(M) \cup FV(N) \\
+\end{aligned}
+$$
 
 *Alpha equivalence* means bounded variables may be replaced without changing the meaning of the lambda expression. In fact, they often have to be renamed in reductions.
 
