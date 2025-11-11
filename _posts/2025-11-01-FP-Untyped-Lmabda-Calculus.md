@@ -105,7 +105,7 @@ Alpha equivalence means bounded variables may be replaced without changing the m
 A lambda expression represents a computation yet to be attempted, like a recipe yet to be performed but the order of the steps to be taken is not yet specified, doing a computational step is analogous to a *beta-reduction*. Given a lambda application, *beta-reduction* is
 
 $$
-(\lambda x.M) N \xrightarrow{\hspace{1cm}\beta\hspace{1cm}} M[x := N]
+(\lambda x.M) N \xrightarrow{\hspace{5pt}\beta\hspace{5pt}} M[x := N]
 $$
 
 where $M[x := N]$ means every instance of $x$ variable in $M$ is replaced by the expression $N$.
