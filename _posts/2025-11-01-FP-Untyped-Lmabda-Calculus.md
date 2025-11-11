@@ -29,7 +29,7 @@ Haskell's scope is also lexical/static, but in some way it is a more extreme exa
 
 ## Untyped Lambda Calculus
 
-Untyped lambda calculus is a Turing complete model of computing[^1]. Historically, Turing machines have been found easier to implement but lambda calculus has been found easier to reason about. Lambda calculus makes the process of function reduction and evaluation explicit, in fact its objects are only functions and variables. Since lambda calculus seems so abstract from what we'd first consider to be computation, it is helpful to know its history.
+Untyped lambda calculus is a Turing complete model of computing.[^1] Historically, Turing machines have been found easier to implement but lambda calculus has been found easier to reason about. Lambda calculus makes the process of function reduction and evaluation explicit, in fact its objects are only functions and variables. Since lambda calculus seems so abstract from what we'd first consider to be computation, it is helpful to know its history.
 Church looked to study functions in purely syntactic terms, just as propositional logic was formalized and studied as application of syntax rules. Functions in mathematics are defined through semantics of sets, rather than pure syntax rules. Lambda calculus is thinking of "functions-as-rules" instead of the traditional "functions-as-sets" ([SEP](#SEP), sec. 1.2).
 It should then be considered in this light as a game of syntax manipulation, before looking for any semantics (or model) of it. The connection to computation was discovered only after the formalism. 
 
@@ -40,24 +40,26 @@ It should then be considered in this light as a game of syntax manipulation, bef
 The lambda calculus has three types of expressions/terms:
 
 - variables, denoted by some identifier of which there are infinitely many available. 
-- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing $x$. We'll denote it as $\lambda x.M$ where `x` is the variable and `M` is an expression[^2].
-- applications, which are ordered pairs of expressions `(M N)`. 
+- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing $x$. We'll denote it as $\lambda x.M$ where $x$ is the variable and $M$ is an expression.[^2]
+- applications, which are ordered pairs of expressions: $(M N)$. 
 
-Examples of lambda terms: `x`, `\x.x`, `(x y)`, `(x \y.y)`, `(x (\y.y x))`, etc.
+Examples of lambda terms with explicit abstractions: $x$, $\lambda x.x$, $(x y)$, $(x \lambda y.y)$, $(x (\lambda y.y x))$, etc.
 
 #### Left Associativity
 
 To avoid writing too many parenthesis, the convention is that: 
 
-- two expressions in sequence are an application: `M N` means `(M N)`,
-- more than two expressions in a sequence are left associative unless indicated otherwise, so a sequence of expressions like `M N L` is meant as `((M N) L)`,
-- multiple nested applications are written with bound variables in a sequence: `\x\y\z.M` or even `\xyz.M` means `\x.(\y.(\z.M))`,
-- abstraction is lower precedence than application, so `\x.M N` means `\x.(M N)` unless indicated otherwise.
+- two expressions in sequence are an application: $M N$ means $(M N)$,
+- more than two expressions in a sequence are left associative unless indicated otherwise, so a sequence of expressions like $M N L$ is meant as $((M N) L)$,
+- multiple nested applications are written with bound variables in a sequence: $\lambda x\lambda y\lambda z.M$ or even $\lambda xyz.M$ means $\lambda x.(\lambda y.(\lambda z.M))$,
+- abstraction is lower precedence than application, so $\lambda x.M N$ means $\lambda x.(M N)$ unless indicated otherwise.
 
 #### Alpha Equivalence
 
-Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of `x` with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
-A simple example would be substituting variable `y` for `x` in expression `\y.x`, naive substituting gives `\y.y` as the result but it should be `\z.y`, the meaning of the term changed with the variable capture; the abstraction meant `x` whatever `y` is, and got replaced to mean return whatever the input is. To avoid this we need labels for bound variables and free variables.
+Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
+A simple example would be substituting variable $y$ for $x$ in expression $\lambda y.x$, naive substituting gives $\lambda y.y$ as the result but it should be $\lambda z.y$, the meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this we need labels for bound variables and free variables.
+
+++++++BKM++++++++
 
 Bound variables of lambda expressions are easily defined inductively as:
 ```txt
@@ -82,7 +84,7 @@ A lambda expression represents a computation yet to be attempted, like a recipe 
 ```
 where `M[x := N]` means every instance of `x` variable in `M` is replaced by `N` expression.
 
-As shown in the previous example, `(\x\y.x) y → \y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in `M` distinct from the free variables in `N`. We use alpha equivalence to make the two distinct and go ahead with the reduction:
+As shown in the previous example, `(\lambda x\lambda y.x) y → \lambda y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in `M` distinct from the free variables in `N`. We use alpha equivalence to make the two distinct and go ahead with the reduction:
 
 ```
 (\x\y.x) y → (\x\z.x) y → \z.y 
@@ -95,13 +97,13 @@ is a correct reduction.
 
 Eta equivalence is defined as regarding 
 
-`\x.(M x)` where `x` is not free in `M` (ensuring `x` is not binding instances of `x` in `M`), 
+`\lambda x.(M x)` where `x` is not free in `M` (ensuring `x` is not binding instances of `x` in `M`), 
 
 as the same as `M`.
 
 Eta equivalence is implied by the definition of beta reduction ([TTFP](#TTFP), p.39); if we only care about the behavior of functions in beta reduction, then we only care about abstractions up to eta equivalence, seeing how it has exactly the same behavior in applications: 
 
-`\x.(M x) N → M N`.
+`\lambda x.(M x) N → M N`.
 
 How eta equivalence is treated depends on the context; it is usually not thought of as a computational step but instead expressing the same computation, like alpha equivalence.
 
