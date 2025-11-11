@@ -183,17 +183,19 @@ where
 
 ++++++BKM ++++++
 
-```txt
-Y g = \x.g(x x) \x.g(x x)
-    = g (\x.g(x x) \x.g(x x))
-    = g (Y g)
-```
+$$
+\begin{aligned}
+Y g &= \lambda x.g(x x) \lambda x.g(x x)
+    &= g (\lambda x.g(x x) \lambda x.g(x x))
+    &= g (Y g)
+\end{aligned}
+$$
 
 The Y combinator is commonly used in functional programming to be able to write recursive functions.
 
 The theory of lambda calculus is deep and growing, but for the rest of this article we return to Haskell.
 
-## Haskell Implementation
+## Haskell's Implementation
 
 ### Currying and Evaluation
 
