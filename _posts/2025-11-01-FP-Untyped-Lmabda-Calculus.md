@@ -56,7 +56,7 @@ To avoid writing too many parenthesis, the convention is that:
 
 #### Alpha Equivalence
 
-Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence.[^3] 
+Breaking slightly from the pure syntactics, and approaching semantics, is the notion of *alpha equivalence*.[^3] 
 There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
 A simple example would be substituting variable $y$ for $x$ in the abstraction 
 
@@ -98,14 +98,14 @@ FV(M N) &= FV(M) \cup FV(N) \\
 \end{aligned}
 $$
 
-*Alpha equivalence* means bounded variables may be replaced without changing the meaning of the lambda expression. In fact, they often have to be renamed in reductions.
+Alpha equivalence means bounded variables may be replaced without changing the meaning of the lambda expression. In fact, they often have to be renamed in reductions.
 
 #### Beta Reduction
 
 A lambda expression represents a computation yet to be attempted, like a recipe yet to be performed but the order of the steps to be taken is not yet specified, doing a computational step is analogous to a *beta-reduction*. Given a lambda application, *beta-reduction* is
 
 $$
-(\lambda x.M) N \xrightarrow{\beta} M[x := N]
+(\lambda x.M) N \xrightarrow{\hspace{1cm}\beta\hspace{1cm}} M[x := N]
 $$
 
 where $M[x := N]$ means every instance of $x$ variable in $M$ is replaced by the expression $N$.
