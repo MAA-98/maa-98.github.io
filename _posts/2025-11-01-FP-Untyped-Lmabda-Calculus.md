@@ -40,7 +40,7 @@ It should then be considered in this light as a game of syntax manipulation, bef
 The lambda calculus has three types of expressions/terms:
 
 - variables, denoted by some identifier of which there are infinitely many available. 
-- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing      $x$. We'll denote it as $\lambda x.M$ where $x$ is the variable and $M$ is an expression.[^2]
+- abstractions, consist of some variable, say $x$, and some expression in the lambda calculus, potentially containing $x$. We'll denote it as $\lambda x.M$ where $x$ is the variable and $M$ is an expression.[^2]
 - applications, which are ordered pairs of expressions: $(M N)$. 
 
 Examples of lambda terms with explicit abstractions: $x$, $\lambda x.x$, $(x y)$, $(x \lambda y.y)$, $(x (\lambda y.y x))$, etc.
@@ -57,15 +57,27 @@ To avoid writing too many parenthesis, the convention is that:
 #### Alpha Equivalence
 
 Breaking slightly from the pure syntactics, and approaching semantics, is the notion of alpha equivalence, without which lambda calculus would just become a naive rewriting/macro system. There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called variable capture). 
-A simple example would be substituting variable $y$ for $x$ in the abstraction $$\lambda y.x$$, naive substituting gives $$\lambda y.y$$ as the result but it should be $$\lambda z.y$$ 
+A simple example would be substituting variable $y$ for $x$ in the abstraction 
+$$
+\lambda y.x ,
+$$
+naive substituting gives 
+$$
+\lambda y.y
+$$ 
+as the result but it should be 
+$$
+\lambda z.y .
+$$ 
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
 ++++++BKM++++++++
 
 Bound variables of lambda expressions are easily defined inductively as:
 $$
-BV(x) = {}
-BV(\x.M) = {x} + BV(M)
+\begin{aligned}
+BV(x) = \{\}
+BV(\x.M) = \{x\} + BV(M)
 BV(M N) = BV(M) + BV(N)
 $$
 where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
