@@ -112,9 +112,9 @@ where $M[x := N]$ means every instance of $x$ variable in $M$ is replaced by the
 
 As shown in the previous example, $(\lambda x\lambda y.x) y \rightarrow \lambda y.y$ is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in $M$ distinct from the free variables in $N$. We use alpha equivalence to make the two distinct and go ahead with the reduction:
 
-$$
+$
 (\lambda x\lambda y.x) y \rightarrow (\lambda x\lambda z.x) y \rightarrow \lambda z.y 
-$$
+$
 
 is a correct reduction.
 
@@ -175,7 +175,9 @@ Fixed point combinators are so that any function applied to it is a fixed point 
 
 Most well-known, and similar to the self-application combinator, is the Y combinator: 
 
-$Y := \lambda f. \lambda x.f(xx) \lambda x.f(xx)$
+$$
+Y := \lambda f. \lambda x.f(xx) \lambda x.f(xx)
+$$
 
 where
 
