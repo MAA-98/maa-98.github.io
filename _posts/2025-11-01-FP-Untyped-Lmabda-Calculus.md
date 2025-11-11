@@ -136,26 +136,26 @@ How eta equivalence is treated depends on the context; it is usually not thought
 
 ### Reduction
 
-++++++BKM ++++++
-
 "There are two approaches to evaluating \[nested\] function applications. For both, the function expression is evaluated to return a function. Next, all occurrences of the function’s bound variable in the function’s body expression are replaced by either
 
 - the value of the argument expression, or
-- the unevaluated argument expression
+- the unevaluated argument expression.
 
 Finally, the function body expression is then evaluated. The first approach is called applicative order and is like \[...\] ‘call by value’: the actual parameter expression is
 evaluated before being passed to the formal parameter. The second approach is called normal order and is like ‘call by name’ \[...\]: the actual parameter expression
-is not evaluated before being passed to the formal parameter." (FPLC)
+is not evaluated before being passed to the formal parameter." ([FPLC](#FPLC))
 
-More formally, if `M → M'` then 
+More formally, if $M \rightarrow M'$ then 
 
-- `(M N) → (M' N)`
-- `(N M) → (N M')`
-- `\x.M → \x.M'`
+- $(M N) \rightarrow (M' N)$
+- $(N M) \rightarrow (N M')$
+- $\lambda x.M \rightarrow \lambda x.M'$
 
-are all valid beta-reductions (TTFP, p.35). The normal order is when we always prefer to use the first beta-reduction when evaluating nested applications, and the applicative order is when we always choose the second.
+are all valid beta-reductions ([TTFP](#TTFP), p.35). The normal order is when we always prefer to use the first beta-reduction when evaluating nested applications, and the applicative order is when we always choose the second.
 
-A lambda expression being in normal form is when there are no unevaluated applicative terms `(\x.M N)`, called a beta-redux, so normal form is analogous to 'fully evaluated'. It is a theorem in lambda calculus that the normal order of evaluation will always find a normal form if it exists. I.e. lambda expressions that *can* terminate will terminate with the normal order strategy. This is not true with applicative order, as intuitively one may have an expression that never terminates but is not used by an outer abstraction anyway. It is also true that any normal form found through reductions is unique, so choice of reduction will not change the final result as long as both terminate.
+++++++BKM ++++++
+
+A lambda expression being in normal form is when there are no unevaluated applicative terms $(\lambda x.M N)$, called a beta-redux, so normal form is analogous to 'fully evaluated'. It is a theorem in lambda calculus that the normal order of evaluation will always find a normal form if it exists. I.e. lambda expressions that *can* terminate will terminate with the normal order strategy. This is not true with applicative order, as intuitively one may have an expression that never terminates but is not used by an outer abstraction anyway. It is also true that any normal form found through reductions is unique, so choice of reduction will not change the final result as long as both terminate.
 
 For this reason, Haskell and most functional programming languages use the normal order, or more accurately lazy evaluation which is an optimization of it. A neat advantage is that one can define infinite data values, but if the outer abstraction only uses a finite subset then it will terminate. 
 
@@ -276,8 +276,13 @@ SEP: The Lambda Calculus, J. Alama, Stanford Encyclopedia of Philosophy, 2023
 <a id="TTFP"></a>
 TTFP: Type Theory & Functional Programming, S. Thompson, 1999
 
+<a id="TTFP"></a>
+FPLC: An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011
 
-An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011 (FPLC)
+
+
+
+
 Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
 Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
 
