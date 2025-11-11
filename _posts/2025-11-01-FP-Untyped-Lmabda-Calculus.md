@@ -226,7 +226,7 @@ A lambda abstraction in Haskell is defined with syntax using `->` instead of a d
 
 and can be applied:
 
-```txt
+```haskell
 ghci> (\x -> x + 2) 4
 6
 ```
@@ -279,12 +279,9 @@ TTFP: Type Theory & Functional Programming, S. Thompson, 1999
 <a id="FPLC"></a>
 FPLC: An Introduction to Functional Programming through Lambda Calculus, G. Michaelson, 2011
 
+Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008
 
-
-
-
-Real World Haskell, B. O'Sullivan, D. Stewart, J. Goerzen, 2008 (RWH)
-Highlights of the History of the Lambda Calculus [link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf)
+Highlights of the History of the Lambda Calculus ([link](https://lawrencecpaulson.github.io/papers/Rosser-Lambda-Calculus.pdf))
 
 ## Footnotes
 [^1]: Adding type restrictions to lambda calculus stops it being Turing complete. 
