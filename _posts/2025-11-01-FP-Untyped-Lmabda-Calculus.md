@@ -159,27 +159,27 @@ For this reason, Haskell and most functional programming languages use the norma
 
 ### Interesting Lambda Expresssions
 
-++++++BKM ++++++
-
 Non-terminating lambda expressions are a great source of study. *Combinators* are lambda abstractions with no free variables, so they just combine arguments.
 
 The self-application combinator is 
 
-`S := \x.(x x)`
+$S := \x.(x x)$
 
-where whatever argument is given, it applies it twice over. E.g. `S \y.xy → \y.(xy xy)` for `x` free.
+where whatever argument is given, it applies it twice over.
 
 If we apply it to itself we get a non-terminating expresssion:
 
-`S S → S S`.
+$S S \xrightarrow{\hspace{5pt}\beta\hspace{5pt}}  S S$.
 
-Fixed point combinators are so that any function applied to it is a fixed point of that function: `(Y g) = g (Y g)`.
+Fixed point combinators are so that any function applied to it is a fixed point of that function: $(Y g) = g (Y g)$.
 
 Most well-known, and similar to the self-application combinator, is the Y combinator: 
 
-`Y := \f. \x.f(xx) \x.f(xx)`
+$Y := \f. \x.f(xx) \x.f(xx)$
 
 where
+
+++++++BKM ++++++
 
 ```txt
 Y g = \x.g(x x) \x.g(x x)
@@ -263,7 +263,7 @@ ghci> (\x -> \y -> x) 2 (fix (\x -> x + 1))
 2
 ```
 
-We talk about types next, which helps to see why we needed parenthesis above to avoid creating a list containing a function, and instead have the list contain the results of the function. It's a *type error*.
+We talk about types next, which helps to see why we needed parenthesis above to avoid creating a list containing a function, and instead have the list contain the results of the function.
 
 ## References
 
