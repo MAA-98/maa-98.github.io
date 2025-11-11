@@ -124,19 +124,19 @@ is a correct reduction.
 
 Eta equivalence is defined as regarding 
 
-`\lambda x.(M x)` where `x` is not free in `M` (ensuring `x` is not binding instances of `x` in `M`), 
+$\lambda x.(M x)$ where $x$ is not free in $M$ (ensuring $x$ is not binding instances of $x$ in $M$), 
 
-as the same as `M`.
+as the same as $M$.
 
 Eta equivalence is implied by the definition of beta reduction ([TTFP](#TTFP), p.39); if we only care about the behavior of functions in beta reduction, then we only care about abstractions up to eta equivalence, seeing how it has exactly the same behavior in applications: 
 
-`\lambda x.(M x) N → M N`.
+$\lambda x.(M x) N \rightarrow M N$.
 
-How eta equivalence is treated depends on the context; it is usually not thought of as a computational step but instead expressing the same computation, like alpha equivalence.
-
-++++++BKM ++++++
+How eta equivalence is treated depends on the context; it is usually not thought of as a computational step but instead expressing the same computation, as in alpha equivalence.
 
 ### Reduction
+
+++++++BKM ++++++
 
 "There are two approaches to evaluating \[nested\] function applications. For both, the function expression is evaluated to return a function. Next, all occurrences of the function’s bound variable in the function’s body expression are replaced by either
 
