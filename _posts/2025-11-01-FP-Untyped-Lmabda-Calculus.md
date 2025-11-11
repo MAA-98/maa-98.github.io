@@ -163,7 +163,7 @@ Non-terminating lambda expressions are a great source of study. *Combinators* ar
 
 The self-application combinator is 
 
-$S := \x.(x x)$
+$S := \lambda x.(x x)$
 
 where whatever argument is given, it applies it twice over.
 
@@ -175,7 +175,7 @@ Fixed point combinators are so that any function applied to it is a fixed point 
 
 Most well-known, and similar to the self-application combinator, is the Y combinator: 
 
-$Y := \f. \x.f(xx) \x.f(xx)$
+$Y := \lambda f. \lambda x.f(xx) \lambda x.f(xx)$
 
 where
 
