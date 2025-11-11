@@ -110,13 +110,12 @@ $$
 
 where $M[x := N]$ means every instance of $x$ variable in $M$ is replaced by the expression $N$.
 
-+++BKM+++
+As shown in the previous example, $(\lambda x\lambda y.x) y \xrightarrow \lambda y.y$ is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in $M$ distinct from the free variables in $N$. We use alpha equivalence to make the two distinct and go ahead with the reduction:
 
-As shown in the previous example, `(\lambda x\lambda y.x) y → \lambda y.y` is an instance of variable capture that changes meaning of the function and is treated as incorrect. So instead, before beta-reduction we consider the bounded variables in `M` distinct from the free variables in `N`. We use alpha equivalence to make the two distinct and go ahead with the reduction:
+$$
+(\x\y.x) y \xrightarrow (\x\z.x) y → \z.y 
+$$
 
-```
-(\x\y.x) y → (\x\z.x) y → \z.y 
-```
 is a correct reduction.
 
 "A computation therefore consists of an initial lambda expression \[...\] plus a finite sequence of lambda terms, each deduced from the preceding term by one application of beta reduction." ([HPFP](#HPFP), p. 36) Note that there is a choice of reduction strategy by which applications one chooses to reduce first.
