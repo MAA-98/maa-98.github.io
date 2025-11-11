@@ -60,21 +60,21 @@ Breaking slightly from the pure syntactics, and approaching semantics, is the no
 There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
 A simple example would be substituting variable $y$ for $x$ in the abstraction 
 
-$$
+$
 \lambda y.x
-$$
+$
 
 naive substituting gives 
 
-$$
+$
 \lambda y.y
-$$ 
+$ 
 
 as the result, but it should be 
 
-$$
+$
 \lambda z.y
-$$ 
+$ 
 
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
