@@ -79,6 +79,7 @@ $$
 BV(x) = \{\}
 BV(\x.M) = \{x\} + BV(M)
 BV(M N) = BV(M) + BV(N)
+\end{aligned}
 $$
 where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
 ```txt
