@@ -60,22 +60,27 @@ Breaking slightly from the pure syntactics, and approaching semantics, is the no
 A simple example would be substituting variable $y$ for $x$ in the abstraction 
 
 $$
-\lambda y.x ,
+\lambda y.x
 $$
 
 naive substituting gives 
+
 $$
 \lambda y.y
 $$ 
+
 as the result but it should be 
+
 $$
 \lambda z.y .
 $$ 
+
 The meaning of the term changed with the variable capture; the abstraction meant $x$ whatever $y$ is, and got replaced to mean return whatever the input is. To avoid this, we need labels for bound variables and free variables.
 
 ++++++BKM++++++++
 
 Bound variables of lambda expressions are easily defined inductively as:
+
 $$
 \begin{aligned}
 BV(x) = \{\}
@@ -83,6 +88,7 @@ BV(\x.M) = \{x\} + BV(M)
 BV(M N) = BV(M) + BV(N)
 \end{aligned}
 $$
+
 where `+` is set union. Free variables are the complement, i.e. variables that are not bound in each expression and can be given similar definition:
 ```txt
 FV(x) = {x}
