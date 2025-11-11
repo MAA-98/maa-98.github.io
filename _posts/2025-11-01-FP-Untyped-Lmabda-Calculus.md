@@ -153,13 +153,13 @@ More formally, if $M \rightarrow M'$ then
 
 are all valid beta-reductions ([TTFP](#TTFP), p.35). The normal order is when we always prefer to use the first beta-reduction when evaluating nested applications, and the applicative order is when we always choose the second.
 
-++++++BKM ++++++
+A lambda expression being in normal form is when there are no unevaluated applicative terms, called beta-reduxes. Normal form is analogous to fully reduced. It is a theorem in lambda calculus that the normal order of evaluation will always find a normal form if it exists, i.e. lambda expressions that *can* terminate will terminate with the normal order strategy. This is not true with applicative order, as one may have an expression that never terminates (example below) but is not used by an outer abstraction anyway. It is also true that any normal form found through reductions is unique, so choice of reduction will not change the final result as long as both terminate.
 
-A lambda expression being in normal form is when there are no unevaluated applicative terms $(\lambda x.M N)$, called a beta-redux, so normal form is analogous to 'fully evaluated'. It is a theorem in lambda calculus that the normal order of evaluation will always find a normal form if it exists. I.e. lambda expressions that *can* terminate will terminate with the normal order strategy. This is not true with applicative order, as intuitively one may have an expression that never terminates but is not used by an outer abstraction anyway. It is also true that any normal form found through reductions is unique, so choice of reduction will not change the final result as long as both terminate.
-
-For this reason, Haskell and most functional programming languages use the normal order, or more accurately lazy evaluation which is an optimization of it. A neat advantage is that one can define infinite data values, but if the outer abstraction only uses a finite subset then it will terminate. 
+For this reason, Haskell and most functional programming languages use the normal order, or more accurately *lazy evaluation* which is an optimization of it. A neat advantage is that one can define infinite data values, but if the outer abstraction only uses a finite subset then it will terminate. 
 
 ### Interesting Lambda Expresssions
+
+++++++BKM ++++++
 
 Non-terminating lambda expressions are a great source of study. *Combinators* are lambda abstractions with no free variables, so they just combine arguments.
 
