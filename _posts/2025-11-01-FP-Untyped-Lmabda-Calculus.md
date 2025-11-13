@@ -209,7 +209,7 @@ ghci> (\x -> x + 2) 4
 
 ### Currying
 
-As shown in the convention of [left associativity](#leftass), multiple nested abstractions $\lambda x.(\lambda y.(\lambda z.M))$ is treated as the same as a multi-argument function $\xyz.M$. This is called currying, and is the standard way to deal with functions in functional programming. 
+As shown in the convention of [left associativity](#leftass), multiple nested abstractions $\lambda x.(\lambda y.(\lambda z.M))$ are treated as the same as a multi-argument function $\lambda xyz.M$. This is called currying, and is the standard way to deal with functions in functional programming. 
 
 In Haskell currying is explicit, but without parenthesis:
 ```hs
