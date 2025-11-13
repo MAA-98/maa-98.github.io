@@ -194,11 +194,30 @@ The theory of lambda calculus is deep and growing, but for the rest of this arti
 
 ## Haskell's Implementation
 
-For use in code, Haskell uses `\` instead of $\lambda$.
+For use in code, Haskell uses `\` instead of $\lambda$ and a lambda abstraction in Haskell is defined with `->` instead of a dot:
 
-### Currying and Evaluation
+```hs
+\x -> x + 2
+```
 
-As shown in the convention of [left associativity](#leftass), multiple nested abstractions `\x(\y(\z.M))` mean the same as a multi-argument function `\xyz.M`. This is called currying, and is the standard way to deal with functions in functional programming. 
+which can be applied:
+
+```haskell
+ghci> (\x -> x + 2) 4
+6
+```
+
+### Currying
+
+As shown in the convention of [left associativity](#leftass), multiple nested abstractions $\lambda x.(\lambda y.(\lambda z.M))$ is treated as the same as a multi-argument function $\xyz.M$. This is called currying, and is the standard way to deal with functions in functional programming. 
+
+In Haskell currying is explicit, but without parenthesis:
+```hs
+ghci> (\x -> \y -> x + y + 2) 3 2
+7
+```
+
+### Evaluation
 
 Haskell's reduction strategy for lambda expressions is normal and lazy as stated above, which is different than most imperative languages that work out the value of an argument before using it in a procedure. 
 This has implications for syntax straight away: in the Haskell REPL, 
@@ -216,29 +235,7 @@ The operator `+` may be considered as some shortcut for a lambda abstraction, it
 
 The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortuntely `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an arguement but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.[^5]
 
-### Lambdas
-
-A lambda abstraction in Haskell is defined with syntax using `->` instead of a dot:
-
-```hs
-\x -> x + 2
-```
-
-and can be applied:
-
-```haskell
-ghci> (\x -> x + 2) 4
-6
-```
-
-Currying is explicit, i.e. without the conventional nesting:
-
-```hs
-ghci> (\x -> \y -> x + y + 2) 3 2
-7
-```
-
-And nesting expresssions is simple, just be careful about the left associative convention:
+Nesting expresssions is simple, just be careful about the left associative convention:
 
 ```hs
 ghci> (\z -> [z])((\x -> \y -> x + y + 2) 3 2)
