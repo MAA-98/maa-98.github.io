@@ -4,7 +4,7 @@ title: "Blog of MAA-98"
 permalink: "/"
 ---
 
-<p>By Marek Alexander Anthony <small>(né Marek Antoni Kurczyński)</small></p>
+<p>By Marek A. Kurczynski</p>
 
 ## Posts
 
