@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Blog of MAA-98"
+title: "Blog of MAK"
 permalink: "/"
 ---
 
