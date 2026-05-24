@@ -1,5 +1,17 @@
-highlighter: rouge
+title: Blog of MAK
+description: Notes on software
+lang: en-US
+url: https://maa-98.github.io
+baseurl: ""
+
 theme: jekyll-theme-primer
+
+markdown: kramdown
+highlighter: rouge
 kramdown:
   math_engine: mathjax
   input: GFM
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap

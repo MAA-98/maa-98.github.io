@@ -2,6 +2,7 @@
 layout: post
 title: "Functional Programming: Untyped Lambda Calculus"
 date: 2025-11-01
+math: true
 ---
 
 # Functional Programming: Untyped Lambda Calculus
@@ -52,7 +53,7 @@ To avoid writing too many parenthesis, the convention is that:
 #### Alpha Equivalence
 
 Breaking slightly from the pure syntactics, and approaching semantics, is the notion of *alpha equivalence*.[^3] 
-There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expresssion, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
+There may be situations where you have a variable used as a *bound* variable in an abstraction, but if we wanted to do a naive replacement of every instance of $x$ with another expression, then a variable that was not bound by a lambda abstraction may not caught up in one (this situation is called *variable capture*). 
 A simple example would be substituting variable $y$ for $x$ in the abstraction 
 
 $
@@ -152,7 +153,7 @@ A lambda expression being in normal form is when there are no unevaluated applic
 
 For this reason, Haskell and most functional programming languages use the normal order, or more accurately *lazy evaluation* which is an optimization of it. A neat advantage is that one can define infinite data values, but if the outer abstraction only uses a finite subset then it will terminate. 
 
-### Interesting Lambda Expresssions
+### Interesting Lambda Expressions
 
 Non-terminating lambda expressions are a great source of study. *Combinators* are lambda abstractions with no free variables, so they just combine arguments.
 
@@ -162,7 +163,7 @@ $S := \lambda x.(x x)$
 
 where whatever argument is given, it applies it twice over.
 
-If we apply it to itself we get a non-terminating expresssion:
+If we apply it to itself we get a non-terminating expression:
 
 $S S \xrightarrow{\hspace{5pt}\beta\hspace{5pt}}  S S$.
 
@@ -227,9 +228,9 @@ ghci> (+ 2) 2
 
 The operator `+` may be considered as some shortcut for a lambda abstraction, it accepts two arguments by currying. The first line is the common infix notation, the second line explicitly invokes the `+` lambda abstraction and applies it twice over, the second line explicitly invokes the lambda abstraction of a single argument `(+ 2)` that just adds `2` to any argument.[^4]
 
-The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortuntely `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an arguement but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.[^5]
+The same idea works for negative `-` expression, it is a lambda function with a single argument, so we can expect `(+) 2 (- 2)` to work, but unfortunately `(+) 2 - 2` will not because the outer lambda abstraction `(+ 2)` expects an integer as an argument but gets `-` instead, writing `(- 2)` alters the left-to-right evaluation strategy to feed an integer for `(+ 2)`.[^5]
 
-Nesting expresssions is simple, just be careful about the left associative convention:
+Nesting expressions is simple, just be careful about the left associative convention:
 
 ```hs
 ghci> (\z -> [z])((\x -> \y -> x + y + 2) 3 2)
@@ -258,7 +259,7 @@ We talk about types next, which helps to see why we needed parenthesis above to 
 
 ## References
 
-<a id="HFPF"></a>
+<a id="HPFP"></a>
 HPFP: Haskell Programming From First Principles C. Allen, J. Moronuki, 2016
 
 <a id="SEP"></a>

@@ -4,8 +4,6 @@ title: "Blog of MAA-98"
 permalink: "/"
 ---
 
-<p>By Marek A. Kurczynski</p>
-
 ## Posts
 
 <ul>
