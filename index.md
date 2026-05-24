@@ -1,8 +1,10 @@
 ---
 layout: default
-title: "Blog of MAK"
+title: "MAK Blog"
 permalink: "/"
 ---
+
+<p>{{ page.description }}</p>
 
 ## Posts
 
