@@ -84,7 +84,7 @@ Because of this regularity, you can save additional meta-data in a pointer value
 
 ## References
 
-<a id="HPFP"></a>
+<a id="APUE"></a>
 APUE: *Advanced Programming in the UNIX Environment*, 3rd ed., W. Richard Stevens and Stephen A. Rago, Addison-Wesley, 2013.
 
 ## Footnotes
