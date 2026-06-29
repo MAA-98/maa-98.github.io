@@ -66,7 +66,7 @@ Heap allocation is usually more expensive than stack allocation because of addit
 
 ### Stack frame and functions in C
 
-The call stack is divided into *stack frames*. A function call usually creates a stack frame which may hold the return address for where to go after returning, saved registers and local variables. Values returned are passed from callee to caller using a register to copy the data at hand-off.[^3]
+The [*call stack*](https://en.wikipedia.org/wiki/Call_stack) is divided into *stack frames*. A function call usually creates a stack frame which may hold the return address for where to go after returning, saved registers and local variables. Values returned are passed from callee to caller using a register to copy the data at hand-off.[^3]
 
 [^3]: Inlining and Return Value Optimizations are about avoiding that data copy and move step.
 
