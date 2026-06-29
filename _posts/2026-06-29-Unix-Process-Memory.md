@@ -52,7 +52,11 @@ A typical Unix process address space is organized roughly as follows: ([APUE](#A
 
 In principle, C could modify its own binary code at runtime because the code is a part of the memory as any other data, and hence allow on-the-fly [program modification](https://en.wikipedia.org/wiki/Self-modifying_code).[^1] In practice this is undefined behavior and in modern systems, various security measures are implemented to thwart code modification, called executable space protections.
 
+[^1]: If you wanted to try this out, it's pretty finicky because you have to modify the compiled assembly code, not C code, and setup to override protections in your OS and architecture. There are tutorials from hackers showing how to exploit buffer overflows to inject code, for example.
+
 Likewise, the stack can get overwritten, as happens in buffer overflows. This corrupts the program and potentially allows security hacks.[^2]
+
+[^2]: [*Modified Harvard architecture*](https://en.wikipedia.org/wiki/Modified_Harvard_architecture) is the most common design today for CPUs, it presents the memory model of a single address space for both instructions and data, but in practice they have different caches for instructions and data.
 
 ## Stack
 
@@ -63,6 +67,8 @@ Heap allocation is usually more expensive than stack allocation because of addit
 ### Stack frame and functions in C
 
 The call stack is divided into *stack frames*. A function call usually creates a stack frame which may hold the return address for where to go after returning, saved registers and local variables. Values returned are passed from callee to caller using a register to copy the data at hand-off.[^3]
+
+[^3]: Inlining and Return Value Optimizations are about avoiding that data copy and move step.
 
 A function call in another function creates a new stack frame below, not within. That's how recursive functions without end cause stack overflow errors; at some point the memory limit is reached. When a function returns its stack frame is discarded, so local variables stop being available. Returned values are available to the caller in registers and the heap changes persist.
 
@@ -76,13 +82,9 @@ For example, on some 64-bit architectures, only the lower 48 bits (or fewer) are
 
 Because of this regularity, you can save additional meta-data in a pointer value in the high or low bits, and then make the pointer regular again when using it as a reference, 'masking' the meta-data. This is called pointer tagging, a method often used in high-level language implementations for efficient meta-data tracking.
 
-## Footnotes
-[^1]: If you wanted to try this out, it's pretty finicky because you have to modify the compiled assembly code, not C code, and setup to override protections in your OS and architecture. There are tutorials from hackers showing how to exploit buffer overflows to inject code, for example.
-[^2]: [*Modified Harvard architecture*](https://en.wikipedia.org/wiki/Modified_Harvard_architecture) is the most common design today for CPUs, it presents the memory model of a single address space for both instructions and data, but in practice they have different caches for instructions and data.
-[^3]: Return Value Optimizations in compilers are about avoiding that data copy and move step.
-
-
 ## References
 
 <a id="HPFP"></a>
 APUE: *Advanced Programming in the UNIX Environment*, 3rd ed., W. Richard Stevens and Stephen A. Rago, Addison-Wesley, 2013.
+
+## Footnotes
