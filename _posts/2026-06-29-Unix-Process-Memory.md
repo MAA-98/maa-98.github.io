@@ -50,13 +50,13 @@ A typical Unix process address space is organized roughly as follows: ([APUE](#A
                low address
 ```
 
-In principle, C could modify its own binary code at runtime because the code is a part of the memory as any other data, and hence allow on-the-fly [program modification](https://en.wikipedia.org/wiki/Self-modifying_code).[^1] In practice this is undefined behavior and in modern systems, various security measures are implemented to thwart code modification, called executable space protections.
+In principle, C could modify its own binary code at runtime because the code is a part of the memory as any other data, and hence allow on-the-fly [program modification](https://en.wikipedia.org/wiki/Self-modifying_code).[^1] In practice this is undefined behavior and in modern systems, various security measures are implemented to thwart code modification, called executable space protections.[^2]
 
 [^1]: If you wanted to try this out, it's pretty finicky because you have to modify the compiled assembly code, not C code, and setup to override protections in your OS and architecture. There are tutorials from hackers showing how to exploit buffer overflows to inject code, for example.
 
-Likewise, the stack can get overwritten, as happens in buffer overflows. This corrupts the program and potentially allows security hacks.[^2]
-
 [^2]: [*Modified Harvard architecture*](https://en.wikipedia.org/wiki/Modified_Harvard_architecture) is the most common design today for CPUs, it presents the memory model of a single address space for both instructions and data, but in practice they have different caches for instructions and data.
+
+Likewise, the stack can get overwritten, as happens in buffer overflows. This corrupts the program and potentially allows security hacks.
 
 ## Stack
 
