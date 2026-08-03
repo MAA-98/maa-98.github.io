@@ -19,25 +19,12 @@ While lambda calculus tried to generalize functions to apply to computation by r
 
 A **category** $\mathcal C$ consists of:
 
-- a collection of **objects**,
-- a collection of **morphisms** between objects,
-- an assignment of a **domain** and **codomain** to every morphism,
+- a collection of **objects** $A,B,C,\ldots$,
+- a collection of **morphisms** $f$ between objects, a **domain** object and **codomain** object for every morphism, giving $f : A \to B$
 - an operation of **composition** for compatible morphisms,
 - an **identity morphism** for every object,
 
 satisfying the laws of associativity and identity.
-
-The objects of $\mathcal C$ are written:
-
-\[
-A,B,C,\ldots
-\]
-
-A morphism from $A$ to $B$ is written:
-
-\[
-f : A \to B
-\]
 
 The object $A$ is the **domain** or **source** of $f$, and $B$ is the **codomain** or **target** of $f$.
 
