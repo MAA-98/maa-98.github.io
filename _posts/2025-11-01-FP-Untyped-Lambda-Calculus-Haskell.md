@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Functional Programming: Untyped Lambda Calculus"
+title: "Functional Programming: Untyped Lambda Calculus: Haskell"
 date: 2025-11-01
 math: true
 ---
 
-# Functional Programming: Untyped Lambda Calculus
+# Functional Programming: Untyped Lambda Calculus: Haskell
 
 ## Introduction
 
