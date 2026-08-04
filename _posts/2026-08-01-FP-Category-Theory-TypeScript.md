@@ -36,7 +36,7 @@ $$
 \operatorname{ocr} \colon \mathsf{Pdf} \to \mathsf{Json}.
 $$
 
-To define this as a category we need a have at least $Pdf$ and $Json$ as types. Then if we have another process that creates text from a JSON value: 
+To define this as a category we need a have at least $\mathsf{Pdf}$ and $\mathsf{Json}$ as types. Then if we have another process that creates text from a JSON value: 
 
 $$
 \operatorname{select} \colon \mathsf{Json} \to \mathsf{Text}.
