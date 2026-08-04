@@ -33,21 +33,22 @@ We will construct layers of categories, from the idea of treating data types as 
 First, let's start with some processes we want to include as arrows. Say we have a data transform like an OCR:
 
 $$
-ocr: Pdf -> Json.
+\operatorname{ocr} \colon \mathsf{Pdf} \to \mathsf{Json}.
 $$
 
 To define this as a category we need a have at least $Pdf$ and $Json$ as types. Then if we have another process that creates text from a JSON value: 
 
 $$
-select: Json -> Text.
+\operatorname{select} \colon \mathsf{Json} \to \mathsf{Text}.
 $$
 
-Call the types/objects defined so far, from the need to define the processes/arrows, as *primitive objects*, and transformations defined so far as *primitive arrows*. 
+Call the types/objects defined so far, from the need to define the processes/arrows, *primitive objects* and transformations defined so far as *primitive arrows*. 
 
 Note that now we can compose:
 
 $$
-select \circ ocr: Pdf -> Json
+\operatorname{select} \circ \operatorname{ocr}
+  \colon \mathsf{Pdf} \to \mathsf{Text}.
 $$ 
 
 such finite sequences of composable morphisms we call a *path*.
@@ -57,7 +58,10 @@ such finite sequences of composable morphisms we call a *path*.
 When we want to consider an element of an object, while keeping a categorical viewpoint, a global element is a a morphism from a special *unit object* $1$ to its type. Hence an application of the previous composition to a PDF file is: 
 
 $$
-select \circ ocr \circ file: 1 -> Json
+\operatorname{select}
+  \circ \operatorname{ocr}
+  \circ \operatorname{file}
+  \colon \mathbf{1} \to \mathsf{Text}.
 $$ 
 
 ## Footnotes
