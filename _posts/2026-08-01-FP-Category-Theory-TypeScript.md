@@ -86,6 +86,17 @@ with the possibility to make this more detailed by having a full $\mathsf{String
 
 ### TypeScript Types
 
+A morphism between two types can be made as:
+
+```ts
+export type Morphism<A, B> = (input: A) => B
+```
+
+If we want to include asynchronous transformations, then:
+```
+export type AsyncMorphism<A, B> = (input: A) => Promise<B>
+```
+
 ## Footnotes
 [^1]: Intensional: without reference to its internals.
 [^2]: Treating `(String) => (File) => (String)` as `(File) => (String) => (String)` needs explicit type transformation in TypeScript, which is annoying.
