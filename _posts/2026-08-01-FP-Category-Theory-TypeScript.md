@@ -57,7 +57,7 @@ such finite sequences of composable morphisms we call a *path*.
 
 ### Global elements
 
-When we want to consider an element of an object, while keeping a categorical viewpoint, a global element is a a morphism from a special *unit object* $1$ to its type. Hence an application of the previous composition to a PDF file is: 
+When we want to consider an element of an object, while keeping a categorical viewpoint, a global element is a a morphism from a special *unit object* $1$ to its type. Hence applying the previous path to a PDF file is: 
 
 $$
 \operatorname{select}
@@ -68,7 +68,7 @@ $$
 
 ### Multiple Arguments
 
-If the operator has more than one input, let's say an LLM-style transformation that takes a $\mathsf{Prompt}$ and $\mathsf{Pdf}$ to return $\mathsf{Text}$. One way to model this is with currying, but I will apply this to TypeScript which doesn't have an ergonomic way to do unordered applications of curried functions[^2], so instead we'll model more closely to TypeScript semantics by having a single input Object which has labelled data types:
+If the operator has more than one input, let's say an LLM-style transformation that takes a $\mathsf{Prompt}$ and $\mathsf{Pdf}$ to return $\mathsf{Text}$. One way to model this is with currying, but I will apply this to TypeScript which doesn't have an ergonomic way to do unordered applications of curried functions[^2], so instead we'll model more closely to TypeScript semantics by having a single input object which has labelled data types:
 
 $$
 \operatorname{llm} \colon \mathsf{LLMInput} \to \mathsf{Text}
@@ -78,6 +78,7 @@ where the labels are the names of the projections
 
 $$
 \operatorname{prompt} \colon \mathsf{LLMInput} \to \mathsf{String}
+\qquad
 \operatorname{document} \colon \mathsf{LLMInput} \to \mathsf{Pdf}
 $$
 
@@ -87,4 +88,4 @@ with the possibility to make this more detailed by having a full $\mathsf{String
 
 ## Footnotes
 [^1]: Intensional: without reference to its internals.
-[^2]: Treating `(String) => (File) => (String)` as `(File) => (String) => (String)` needs explicit type transformation, which is annoying.
+[^2]: Treating `(String) => (File) => (String)` as `(File) => (String) => (String)` needs explicit type transformation in TypeScript, which is annoying.
