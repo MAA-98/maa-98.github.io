@@ -9,6 +9,8 @@ math: true
 
 ## Introduction
 
+This article will go through the categorical modelling of functions in programming as data transformations, with an example of applying the model to TypeScript.
+
 ### Another generalization of functions
 
 While lambda calculus tried to generalize functions to apply to computation by reducing it to syntactic machinations, category theory generalizes functions by reducing its intensional[^1] definition: a function is a mapping between two sets (such that...), often drawn as an arrow between two circles with points in the circles symbolizing elements; a morphism in a category of objects is an arrow between two objects.
@@ -26,7 +28,7 @@ A **category** $\mathcal C$ consists of:
 
 A morphism is sometimes also called an **arrow**.
 
-### Application to programming
+## Application to programming
 
 We will construct layers of categories, from the idea of treating data types as objects and processes on those data as morphisms.
 
@@ -62,7 +64,27 @@ $$
   \circ \operatorname{ocr}
   \circ \operatorname{file}
   \colon \mathbf{1} \to \mathsf{Text}.
-$$ 
+$$
+
+### Multiple Arguments
+
+If the operator has more than one input, let's say an LLM-style transformation that takes a $\mathsf{Prompt}$ and $\mathsf{Pdf}$ to return $\mathsf{Text}$. One way to model this is with currying, but I will apply this to TypeScript which doesn't have an ergonomic way to do unordered applications of curried functions[^2], so instead we'll model more closely to TypeScript semantics by having a single input Object which has labelled data types:
+
+$$
+\operatorname{llm} \colon \mathsf{LLMInput} \to \mathsf{Text}
+$$
+
+where the labels are the names of the projections
+
+$$
+\operatorname{prompt} \colon \mathsf{LLMInput} \to \mathsf{String}
+\operatorname{document} \colon \mathsf{LLMInput} \to \mathsf{Pdf}
+$$
+
+with the possibility to make this more detailed by having a full $\mathsf{String}$ object.
+
+### TypeScript Types
 
 ## Footnotes
 [^1]: Intensional: without reference to its internals.
+[^2]: Treating `(String) => (File) => (String)` as `(File) => (String) => (String)` needs explicit type transformation, which is annoying.
